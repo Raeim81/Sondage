@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Feedback Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightgrey;
+            margin: 0;
+            overflow-x: hidden;
+            /* Prevent horizontal scroll */
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            padding-top: 30px;
+            z-index: 1000;
+            /* Make sure sidebar is above other elements */
+        }
+
+        .sidebar a {
+            padding: 20px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+            border-radius: 10px;
+        }
+
+
+
+        .dashboard-metrics {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            margin-left: 10%;
+            height: 60px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+        }
+
+        .metric {
+            width: 180px;
+            text-align: center;
+            background-color: #fff;
+            padding: 4px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            /* Provide space above the title */
+        }
+
+        .myButton {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 50px;
+            margin-left: 20px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .myButton:hover {
+            background-color: #3e8e41;
+            cursor: pointer;
+        }
+
+        /* Fix the layout for the chart containers */
+        .container-charts {
+            padding-left: 200px;
+            /* Offset for sidebar */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            /* Responsive grid layout */
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .charts-container {
+
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            /* Responsive grid layout */
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .chart-box {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-left: 5%;
+        }
+
+        .chart-box canvas {
+            width: 100% !important;
+            /* Override any inline width */
+            height: auto !important;
+            /* Override any inline height */
+            max-height: 400px;
+            /* Set maximum height */
+        }
+
+        #monthlyFeedbackChartContainer {
+            margin-left: 25%;
+
+        }
+
+        #overallFeedbackChartContainer {
+            margin-left: 25%;
+
+        }
+
+        header {
+            background-color: #333;
+            overflow: hidden;
+            width: 25%;
+            margin-left: 40%;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+        }
+
+        footer {
+            height: 40px;
+            width: 50%;
+            color: #fff;
+            text-align: center;
+            margin-top: 70px;
+            margin-left: 30%;
+            padding: 10px;
+            background-color: #BDC3C7;
+            border-radius: 10px;
+        }
+
+        @media only screen and (min-width: 768px) and (max-width: 1024px) {
+            /* Tablet screens - Styles specific to your 8 to 13-inch tablets */
+
+            .sidebar {
+                /* Adjust sidebar size and padding for tablet screens */
+                width: 100px;
+                /* Compact sidebar */
+                padding-top: 60px;
+            }
+
+            .sidebar a {
+                padding: 10px 10px;
+                font-size: 15px;
+                /* Smaller font size for compact sidebar */
+                text-align: center;
+                /* Align text to center */
+            }
+
+
+
+
+            .myButton {
+                margin-left: 7px;
+                height: 40px;
+                width: 80px;
+                padding: 5px 5px;
+            }
+
+            /* Adjusting the chart container */
+            .container-charts,
+            .charts-container {
+                padding-left: 0;
+                /* Remove padding offset for sidebar */
+                grid-template-columns: 1fr;
+                /* Single column layout */
+                gap: 10px;
+                /* Reduce the gap between grid items */
+                padding: 10px;
+                /* Padding around the grid container */
+            }
+
+            .chart-box {
+                margin-left: 0;
+                /* Align charts with the grid container */
+                width: 50%;
+                /* Width is handled by the grid */
+                max-width: none;
+                /* Remove any max-width constraints */
+                padding: 10px;
+                /* Adjust padding for charts */
+            }
+
+            #feedbackChartContainer {
+                margin-left: 25%;
+
+            }
+
+            #lineChartContainer {
+                margin-left: 25%;
+
+            }
+
+            .chart-box canvas {
+                max-height: 250px;
+
+                /* Adjust the max height of the canvas for tablet screens */
+            }
+
+            .dashboard-metrics {
+                margin-left: 10%;
+            }
+
+            .metric {
+                width: 70px;
+            }
+
+            h3 {
+
+                font-size: 15px;
+            }
+
+
+
+            header {
+                width: 60%;
+                /* Full width headers and footers on tablet */
+                margin-left: 20%;
+                /* Reset any margin offsets */
+            }
+
+            footer {
+                width: 50%;
+                padding-bottom: 25px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Feedback Dashboard</h1>
+    </header>
+
+    <div class="sidebar">
+
+        <a href="#analyze">Analyze Feedback</a>
+        <a href="#generate">Generate Reports</a>
+        <a href="#export">Export Reports</a>
+        <a href="#summary">Feedback Summary</a>
+        <button class="myButton" onclick="myButtonClicked()">Log out</button>
+    </div>
+
+    <div class="container-charts">
+        <div class="chart-box" id="monthlyFeedbackChartContainer">
+            <h2>Monthly Feedback Distribution</h2>
+            <canvas id="monthlyFeedbackChart"></canvas>
+        </div>
+
+        <div class="chart-box" id="feedbackChartContainer">
+            <h2>Monthly Feedback Ratings</h2>
+            <canvas id="feedbackChart"></canvas>
+        </div>
+    </div>
+
+
+    <!-- Charts Container -->
+    <div class="charts-container">
+        <!-- Pie Chart -->
+        <div class="chart-box" id="overallFeedbackChartContainer">
+            <h2>Overall Feedback Distribution</h2>
+            <canvas id="overallFeedbackChart"></canvas>
+        </div>
+
+        <!-- Line Chart -->
+        <div class="chart-box" id="lineChartContainer">
+            <h2>Annual Feedback Graph</h2>
+            <canvas id="lineChart"></canvas>
+        </div>
+    </div>
+
+
+    <div class="dashboard-metrics">
+        <div class="metric">
+            <h3>Invites Sent</h3>
+            <p id="invitesSent">250 (100%)</p>
+        </div>
+
+        <div class="metric">
+            <h3>Feedback Given</h3>
+            <p id="feedbackGiven">200 (80%)</p>
+        </div>
+        <div class="metric">
+            <h3>Positive Feedback</h3>
+            <p id="positiveFeedback">150 (60%)</p>
+        </div>
+        <div class="metric">
+            <h3>Negative Feedback</h3>
+            <p id="negativeFeedback">100 (40%)</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false // This will allow the charts to fill their containers
+            };
+
+            const monthlyFeedbackData = {
+                labels: ['Excellent', 'Very Good', 'Good', 'Fair', 'Poor'],
+                datasets: [{
+                    data: [120, 90, 60, 30, 15],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)',
+                        'rgba(255, 99, 132, 0.6)'
+                    ],
+                }]
+            };
+
+            const monthlyFeedbackCtx = document.getElementById('monthlyFeedbackChart').getContext('2d');
+            new Chart(monthlyFeedbackCtx, {
+                type: 'pie',
+                data: monthlyFeedbackData,
+                options: chartOptions
+            });
+
+            const feedbackData = {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [
+                    {
+                        label: 'Good',
+                        data: [12, 15, 22],
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    },
+                    {
+                        label: 'Mediocre',
+                        data: [5, 8, 3],
+                        backgroundColor: 'rgba(255, 206, 86, 0.6)',
+                    },
+                    {
+                        label: 'Poor',
+                        data: [3, 2, 5],
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                    }
+                ]
+            };
+
+            const ctx = document.getElementById('feedbackChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: feedbackData,
+                options: {
+                    ...chartOptions,
+                    scales: {
+                        x: { stacked: true },
+                        y: { stacked: true, beginAtZero: true }
+                    }
+                }
+            });
+
+            const overallFeedbackData = {
+                labels: ['Good', 'Mediocre', 'Poor'],
+                datasets: [{
+                    data: [150, 40, 60],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(255, 99, 132, 0.6)'
+                    ],
+                }]
+            };
+
+            const pieCtx = document.getElementById('overallFeedbackChart').getContext('2d');
+            new Chart(pieCtx, {
+                type: 'pie',
+                data: overallFeedbackData,
+                options: chartOptions
+            });
+
+            const lineChartCtx = document.getElementById('lineChart').getContext('2d');
+            new Chart(lineChartCtx, {
+                type: 'line',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    datasets: [{
+                        label: 'Satisfaction Level',
+                        data: [65, 59, 80, 81, 56],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    ...chartOptions,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+
+    </script>
+
+    <footer>
+        <p>Copyright &copy; 2024 Powered by Hanae and Co. partnered with ACOPAD. Tous droits réservés.</p>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation de la satisfaction</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+
+
+    <style>
+        body {
+            background-color: #f4f7fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .survey-form {
+            max-width: 800px;
+            margin: 2rem auto;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            /* Centers text */
+        }
+
+        .survey-form h2 {
+            font-size: 1.75rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .survey-form p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #333;
+            display: block;
+            /* Full width */
+            text-align: left;
+            /* Aligns the label text to the left */
+            margin: 0 auto 0.5rem auto;
+            /* Centers label */
+            width: 70%;
+            /* Matches the textarea width */
+        }
+
+        .form-check-label {
+            text-align: left;
+            width: 70%;
+            margin: 0 auto;
+            display: inline-block;
+        }
+
+        .form-check-input {
+            margin-top: 0.3em;
+            margin-right: 0.5em;
+        }
+
+        .form-check {
+            text-align: left;
+            display: inline-block;
+            width: 70%;
+            margin: 0 auto 1rem auto;
+            /* Centers the radio buttons */
+        }
+
+        .btn-primary {
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 20px;
+            color: #fff;
+            width: 30%;
+            /* Button width matches other inputs */
+            margin-top: 1rem;
+            /* Space above the button */
+            box-shadow: none;
+            /* Removes default box shadow */
+            transition: all 0.2s ease-in-out;
+            /* Makes the button transition on hover */
+        }
+
+        .btn-primary {
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 20px;
+            color: #fff;
+            width: auto;
+            /* Set width to auto to prevent it from becoming too narrow */
+            min-width: 150px;
+            /* Prevent the button from being too narrow */
+            transition: all 0.2s ease-in-out;
+            display: inline-block;
+            /* Inline block for proper alignment */
+            white-space: nowrap;
+            /* Prevent the text from wrapping */
+        }
+
+
+        .form-control,
+        .form-control:focus {
+            border-color: #ced4da;
+            border-radius: 5px;
+            width: 70%;
+            /* Adjust the width of input fields */
+            margin: 0 auto 1rem auto;
+            /* Centering inputs */
+            display: block;
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            margin-top: 1rem;
+            background-color: #f8f9fa;
+            padding: 0.5rem;
+            border: 1px solid #ced4da;
+            /* Border to match the inputs */
+            resize: vertical;
+            /* Allows vertical resize only */
+        }
+
+        .question-container {
+            border: 1px solid #ced4da;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            display: inline-block;
+            width: 80%;
+
+            /* Matches other inputs */
+
+        }
+
+        .star-rating {
+            direction: rtl;
+            /* Right-to-left */
+            font-size: 2em;
+            unicode-bidi: bidi-override;
+            display: inline-block;
+        }
+
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+
+        .star-rating label.star {
+            color: #ddd;
+
+            cursor: pointer;
+        }
+
+        .star-rating label.star:hover,
+        .star-rating label.star:hover~label.star,
+        .star-rating input[type="radio"]:checked~label.star {
+            color: #ffc107;
+            /* Gold star color on hover/checked */
+        }
+
+
+        /* New style for question containers */
+    </style>
+
+</head>
+
+<body>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                <div class="survey-form">
+                    <h2>Évaluation de la satisfaction à froid de l'apprenant</h2>
+                    <!-- Introductory text -->
+                    <p>Bonjour,</p>
+                    <p>Vous avez vécu une formation avec nous il y a quelques semaines et nous vous en remercions.</p>
+                    <p>Dans le cadre du suivi qualité et d'une recherche constante d'amélioration de nos prestations,
+                        nous aimerions avoir votre retour "à froid" sur cette formation et sur son intérêt dans le cadre
+                        de vos activités professionnelles.</p>
+                    <p>Bien cordialement,</p>
+                    <!-- Form begins -->
+                    <form>
+                        <!-- Questions go here -->
+
+                        <div class="question-container">
+                            <div class="mb-3">
+                                <label for="question1Yes" class="form-label">1. La formation a-t-elle répondu à vos
+                                    attentes
+                                    ?</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="question1" id="question1Yes"
+                                        value="oui">
+                                    <label class="form-check-label" for="question1Yes">Oui</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="question1"
+                                        id="question1Partially" value="partiellement">
+                                    <label class="form-check-label" for="question1Partially">Partiellement</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="question1" id="question1No"
+                                        value="non">
+                                    <label class="form-check-label" for="question1No">Non</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- New Question 2 -->
+                        <div class="question-container">
+                            <div class="mb-3">
+                                <label for="question5" class="form-label">2. Les exercices pratiques étaient-ils utiles
+                                    ?</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="question5" id="question5Yes"
+                                        value="oui">
+                                    <label class="form-check-label" for="question5Yes">Oui</label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="question5"
+                                        id="question5partially" value="Partiellement">
+                                    <label class="form-check-label" for="question5No">Partiellement</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="question5" id="question5No"
+                                        value="non">
+                                    <label class="form-check-label" for="question5No">Non</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="question-container">
+                            <!-- New Question 3 -->
+                            <div class="mb-3">
+                                <label for="question6" class="form-label">3. Le format de la formation était-il adapté
+                                    ?</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="question6" id="question6Yes"
+                                        value="oui">
+                                    <label class="form-check-label" for="question6Yes">Oui</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="question6" id="question6Somewhat"
+                                        value="partiellement">
+                                    <label class="form-check-label" for="question6Somewhat">Partiellement</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="question6" id="question6No"
+                                        value="non">
+                                    <label class="form-check-label" for="question6No">Non</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- New Question 4 -->
+
+
+                        <div class="question-container">
+
+                            <div class="star-rating">
+                                <div class="star-rating">
+                                    <input class="star-input" type="radio" id="5-stars" name="rating" value="5" />
+                                    <label class="star" for="5-stars" onclick="toggleStar(this);">&#9733;</label>
+                                    <input class="star-input" type="radio" id="4-stars" name="rating" value="4" />
+                                    <label class="star" for="4-stars" onclick="toggleStar(this);">&#9733;</label>
+                                    <input class="star-input" type="radio" id="3-stars" name="rating" value="3" />
+                                    <label class="star" for="3-stars" onclick="toggleStar(this);">&#9733;</label>
+                                    <input class="star-input" type="radio" id="2-stars" name="rating" value="2" />
+                                    <label class="star" for="2-stars" onclick="toggleStar(this);">&#9733;</label>
+                                    <input class="star-input" type="radio" id="1-star" name="rating" value="1" />
+                                    <label class="star" for="1-star" onclick="toggleStar(this);">&#9733;</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="question7" class="form-label">Auriez-vous des recommandations pour améliorer
+                                    nos
+                                    formations ?</label>
+                                <textarea class="form-control" id="question7" rows="4"></textarea>
+                            </div>
+
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary mt-4 mt-sm-0">Envoyer mes réponses</button>
+
+                        </div>
+
+                    </form> <!-- Form ends -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
