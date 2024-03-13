@@ -1,0 +1,298 @@
+@media screen and (max-width: 1200px) {
+
+    .container-charts,
+    .charts-container {
+        grid-template-columns: 1fr;
+        /* Stack charts in a single column */
+    }
+
+    .sidebar,
+    .main-content {
+        margin-left: 0;
+        padding: 0;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .myButton {
+        margin: 20px auto;
+        /* Center the button in the available space */
+        display: block;
+    }
+
+    header,
+    footer {
+        width: 100%;
+        /* Full width */
+        margin-left: 0;
+        /* Reset any margin */
+        text-align: center;
+    }
+
+    .chart-box {
+        margin-left: 0;
+        /* Reset any margin */
+        width: auto;
+        /* Auto width based on the screen size */
+    }
+
+    .chart-box canvas {
+        max-width: 100%;
+        /* Full width within the chart box */
+        max-height: none;
+        /* Reset any max-height */
+    }
+}
+
+@media screen and (max-width: 1024px) {
+
+    /* Adjust the layout for smaller desktop or large tablet screens */
+    .sidebar {
+        /* Sidebar adjustments for tablets */
+        width: 60px;
+        /* Reduce the width of the sidebar */
+    }
+
+    .sidebar a {
+        /* Adjust font size and padding inside sidebar for tablets */
+        font-size: 14px;
+        padding: 10px;
+        text-align: center;
+        /* Center the text if sidebar is smaller */
+    }
+
+    /* Adjustments for container and chart layout */
+    .container-charts,
+    .charts-container {
+        padding: 0;
+        grid-template-columns: 1fr;
+        /* Stack the charts in one column */
+    }
+
+    .chart-box {
+        /* Adjust the chart box for smaller screens */
+        width: auto;
+        /* Full width */
+        margin: 10px;
+        /* Add some margin */
+    }
+
+    .chart-box canvas {
+        /* Ensure the canvas fits the container */
+        max-height: 300px;
+        /* Adjust max height for visibility */
+    }
+
+    /* Adjust header and footer */
+    header,
+    footer {
+        width: 100%;
+        /* Full width */
+        margin-left: 0;
+        /* Align with the edge of the screen */
+        padding: 0 10px;
+        /* Add padding */
+    }
+
+    /* Adjust dashboard metric items */
+    .dashboard-metrics {
+        flex-direction: column;
+        /* Stack metrics vertically */
+        align-items: center;
+        /* Align metrics in the center */
+        margin: 10px 0;
+        /* Add top and bottom margin */
+    }
+}
+
+.sidebar {
+    position: fixed;
+    width: 100%;
+    /* Sidebar takes full width */
+    height: auto;
+    /* Adjust height automatically */
+    padding-top: 0;
+    z-index: 2;
+    /* Ensure sidebar is above other content */
+    transform: translateX(-100%);
+    /* Hide sidebar */
+    transition: transform 0.3s ease;
+    /* Animated transition for sidebar */
+}
+
+/* Visible state for the sidebar when hamburger is clicked */
+.sidebar.visible {
+    transform: translateX(0);
+    /* Show sidebar */
+}
+
+/* Hamburger menu icon */
+.hamburger-menu {
+    display: block;
+    /* Show hamburger menu */
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 3;
+    /* Above the sidebar */
+    cursor: pointer;
+}
+
+/* Adjust the main content area */
+.main-content {
+    margin-left: 0;
+    /* Remove margin as the sidebar is now overlay */
+    padding: 50px 20px 20px;
+    /* Add padding to the top */
+}
+
+/* Center the titles above the charts */
+.chart-box h2 {
+    position: absolute;
+    top: -40px;
+    /* Adjust distance to the top of the chart */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+/* Adjust the footer to not cover content */
+footer {
+    position: relative;
+    /* Ensure footer comes after the content */
+    bottom: 0;
+    width: 100%;
+    margin-top: 20px;
+    /* Add space between the content and the footer */
+}
+
+
+@media screen and (max-width: 480px) {
+
+    /* Adjust header and footer font size for readability */
+    header h1,
+    footer p {
+        font-size: 16px;
+    }
+
+    .dashboard-metrics .metric {
+        /* Full width metrics for mobile */
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    .sidebar {
+        /* Full screen sidebar for mobile */
+        position: absolute;
+        z-index: 1001;
+        /* Ensure sidebar is on top */
+        height: auto;
+        /* Auto height based on content */
+        background-color: rgba(51, 51, 51, 0.9);
+        /* Translucent background */
+    }
+
+    /* When the sidebar is active, we may want to slide in the sidebar */
+    .sidebar.active {
+        left: 0;
+    }
+
+    .myButton {
+        /* Adjust button for mobile */
+        width: 80%;
+        /* Make the button larger */
+        margin: 10px auto;
+        /* Center the button */
+    }
+}
+
+/* Media query for large screen mobile devices in portrait mode */
+@media screen and (max-width: 414px) {
+
+    /* Styles for mobile devices */
+    header,
+    footer {
+        /* Full width and centered */
+        width: 100%;
+        text-align: center;
+    }
+
+    header h1,
+    footer p {
+        /* Adjust font size for better visibility */
+        font-size: 18px;
+    }
+
+    .container-charts,
+    .charts-container {
+        /* No side padding, charts take full width */
+        padding: 0;
+    }
+
+    .chart-box {
+        /* Remove any side margins and make the chart fill the container */
+        margin: 0;
+        width: 100%;
+    }
+
+    .chart-box canvas {
+        /* Adjust canvas size to be fully responsive */
+        max-width: 100%;
+        max-height: 250px;
+        /* Adjust height to ensure charts are not too tall */
+    }
+
+    .sidebar {
+        /* Adjust the sidebar for a mobile layout */
+        width: 100%;
+        /* Full width */
+        height: auto;
+        /* Height to fit content */
+        position: relative;
+        /* Position it in the normal flow */
+        padding-top: 0;
+        /* Remove top padding */
+    }
+
+    .sidebar a {
+        padding: 10px 15px;
+        /* Adjust padding */
+        text-align: center;
+        /* Center text */
+    }
+
+    .dashboard-metrics {
+        /* Stack metrics vertically and center align */
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0;
+        /* Align metrics to the edge */
+    }
+
+    .metric {
+        /* Full width metrics */
+        width: 90%;
+        margin-bottom: 10px;
+        /* Space between metrics */
+    }
+}
+
+/* Media query for even smaller mobile devices */
+@media screen and (max-width: 375px) {
+    /* Smaller mobile adjustments here if necessary */
+}
+
+/* Media query for very small mobile devices */
+@media screen and (max-width: 320px) {
+
+    /* Adjustments for devices like iPhone SE */
+    header h1,
+    footer p {
+        /* Further reduce font size for very small devices */
+        font-size: 16px;
+    }
+}
