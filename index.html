@@ -145,11 +145,13 @@
         }
 
         .star-rating {
-            direction: rtl;
-            /* Right-to-left */
-            font-size: 2em;
-            unicode-bidi: bidi-override;
-            display: inline-block;
+        direction: rtl; /* Right-to-left */
+        font-size: 1.5em; /* Adjust the size of stars to be smaller */
+        unicode-bidi: bidi-override;
+        display: inline-block;
+        /* Make sure the container fits the stars */
+        width: 100%; /* Ensure the star-rating element takes up the full width */
+        justify-content: center; /* Center the stars if using flex */
         }
 
         .star-rating input[type="radio"] {
@@ -158,7 +160,6 @@
 
         .star-rating label.star {
             color: #ddd;
-
             cursor: pointer;
         }
 
